@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ohkawa_jump.unity
+    guid: f24a0e954c43d234ea4a8c5d19a7febd
+  - enabled: 1
+    path: Assets/Scenes/ohkawa_SampleFall.unity
+    guid: ad86a450f2b0a32498827d8168b096ef
+  - enabled: 1
+    path: Assets/Scenes/SampleTitle.unity
+    guid: 47760f10791bf104d89edf6839bcfc43
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

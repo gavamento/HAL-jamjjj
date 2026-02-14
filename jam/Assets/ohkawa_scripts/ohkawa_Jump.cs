@@ -3,18 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class JumpPowerScript : MonoBehaviour
 {
-    public string fallSceneName = "SampleTitle";    //ƒWƒƒƒ“ƒv‚ÌƒV[ƒ“‚ªI‚í‚Á‚½‚ç‚±‚Ì–¼‘O‚ÌƒV[ƒ“‚É‘JˆÚ‚·‚é
-    public KeyCode clickKey = KeyCode.Mouse0;       //ƒWƒƒƒ“ƒv‚·‚é‚½‚ß‚ÌƒL[
+    public string fallSceneName = "SampleTitle";    //ã‚¸ãƒ£ãƒ³ãƒ—ã®ã‚·ãƒ¼ãƒ³ãŒçµ‚ã‚ã£ãŸã‚‰ã“ã®åå‰ã®ã‚·ãƒ¼ãƒ³ã«é·ç§»ã™ã‚‹
+    public KeyCode clickKey = KeyCode.Mouse0;       //ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼
 
-    GameObject clickedGameObject;//ƒNƒŠƒbƒN‚³‚ê‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ð‘ã“ü‚·‚é•Ï”
+    GameObject clickedGameObject;//ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä»£å…¥ã™ã‚‹å¤‰æ•°
 
-    public static int JumpPower = 0;                //ƒWƒƒƒ“ƒv‚·‚é‚½‚ß‚Ìƒpƒ[(‰¼)
+    public static int JumpPower = 0;                //ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ãŸã‚ã®ãƒ‘ãƒ¯ãƒ¼(ä»®)
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        JumpPower = 0;      //‰Šú‰»ˆ—Bˆê’Uƒpƒ[‚¾‚¯0‚É‚µ‚Ä‚¢‚Ü‚·B
-        //JumpPower‚ÍƒQ[ƒW‚ÌMAX’l‚ª600Aˆê•bŠÔ‚É60(10%)Œ¸‚Á‚ÄAƒNƒŠƒbƒN‚Å30(5%)‘‚¦‚é‚æ‚¤‚ÉÝ’è‚µ‚Ä‚¢‚Ü‚·B
+        JumpPower = 0;      //åˆæœŸåŒ–å‡¦ç†ã€‚ä¸€æ—¦ãƒ‘ãƒ¯ãƒ¼ã ã‘0ã«ã—ã¦ã„ã¾ã™ã€‚
+        //JumpPowerã¯ã‚²ãƒ¼ã‚¸ã®MAXå€¤ãŒ600ã€ä¸€ç§’é–“ã«60(10%)æ¸›ã£ã¦ã€ã‚¯ãƒªãƒƒã‚¯ã§30(5%)å¢—ãˆã‚‹ã‚ˆã†ã«è¨­å®šã—ã¦ã„ã¾ã™ã€‚
     }
 
     // Update is called once per frame
@@ -33,11 +33,11 @@ public class JumpPowerScript : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 clickedGameObject = hit.collider.gameObject;
-                Debug.Log(clickedGameObject.name);//ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì–¼‘O‚ðo—Í
+                Debug.Log(clickedGameObject.name);//ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰ã‚’å‡ºåŠ›
 
                 if(clickedGameObject.tag == "Player")
                 {
-                    //ƒNƒŠƒbƒN‚ÅƒNƒŠƒbƒN‰ñ”‚ð‘‰Á
+                    //ã‚¯ãƒªãƒƒã‚¯ã§ã‚¯ãƒªãƒƒã‚¯å›žæ•°ã‚’å¢—åŠ 
                     JumpPower += 100;
                 }
             }
@@ -47,8 +47,8 @@ public class JumpPowerScript : MonoBehaviour
 
         Debug.Log("Jumpower: " + JumpPower);
 
-        //if“à‚ÌðŒ‚ÅƒV[ƒ“‘JˆÚ(—Ž‚¿‚éƒV[ƒ“‚ÉˆÈ~)
-        if (JumpPower >= 10)
+        //ifå†…ã®æ¡ä»¶ã§ã‚·ãƒ¼ãƒ³é·ç§»(è½ã¡ã‚‹ã‚·ãƒ¼ãƒ³ã«ä»¥é™)
+        if (JumpPower >= 100)
         {
             //SceneManager.LoadScene(fallSceneName);
         }
