@@ -6,7 +6,7 @@ public class JumpPowerScript : MonoBehaviour
     public string fallSceneName = "SampleTitle";    //ジャンプのシーンが終わったらこの名前のシーンに遷移する
     public KeyCode clickKey = KeyCode.Mouse0;       //ジャンプするためのキー
 
-    public static int JumpPower = 0;                //ジャンプするためのパワー(仮)
+    public static int JumpPower = 30;                //ジャンプするためのパワー(仮)
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +25,7 @@ public class JumpPowerScript : MonoBehaviour
         }
 
         //if内の条件でシーン遷移(落ちるシーンに以降)
-        if (JumpPower >= 10)
+        if (JumpPower >= 100)
         {
             SceneManager.LoadScene(fallSceneName);
         }
