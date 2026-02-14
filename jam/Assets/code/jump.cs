@@ -21,6 +21,7 @@ public class jump : MonoBehaviour, IPointerClickHandler
 
     bool isStanding = true;
     int lastToggleFrame = -1;
+    bool spaceWasPressedLastFrame;
 
     void Start()
     {
@@ -71,18 +72,21 @@ public class jump : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        // Spaceを押している間は座り姿、離したら立ち姿に戻す（Input System 対応）
-        if (Keyboard.current != null)
+        bool spacePressed = Keyboard.current != null && Keyboard.current.spaceKey.isPressed;
+
+        // Spaceを押している間は座り姿
+        if (spacePressed)
         {
-            if (Keyboard.current.spaceKey.isPressed)
-            {
-                if (isStanding) { isStanding = false; ApplyPose(); }
-            }
-            else
-            {
-                if (!isStanding) { isStanding = true; ApplyPose(); }
-            }
+            if (isStanding) { isStanding = false; ApplyPose(); }
         }
+        // Spaceを「離した瞬間」だけ立ち姿に戻す（毎フレーム上書きしないのでクリックの切り替えが維持される）
+        else if (spaceWasPressedLastFrame)
+        {
+            isStanding = true;
+            ApplyPose();
+        }
+
+        spaceWasPressedLastFrame = spacePressed;
 
         // 新 Input System: 左クリックが押されたフレームで、このオブジェクトがクリックされていればトグル
         if (WasLeftClickPressedThisFrame() && IsClickedThisObject())
