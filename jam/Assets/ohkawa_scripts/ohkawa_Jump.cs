@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class JumpPowerScript : MonoBehaviour
 {
@@ -10,14 +9,12 @@ public class JumpPowerScript : MonoBehaviour
 
     public static int JumpPower = 0;                //ジャンプするためのパワー(仮)
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         JumpPower = 0;      //初期化処理。一旦パワーだけ0にしています。
         //JumpPowerはゲージのMAX値が600、一秒間に60(10%)減って、クリックで30(5%)増えるように設定しています。
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(JumpPower <= 0)
@@ -52,5 +49,11 @@ public class JumpPowerScript : MonoBehaviour
         {
             //SceneManager.LoadScene(fallSceneName);
         }
+    }
+
+    void DoJump()
+    {
+        if (jumpTarget == null) return;
+        jumpTarget.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 }
