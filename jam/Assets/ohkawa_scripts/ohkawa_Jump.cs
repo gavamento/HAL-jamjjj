@@ -14,11 +14,17 @@ public class JumpPowerScript : MonoBehaviour
     void Start()
     {
         JumpPower = 0;      //初期化処理。一旦パワーだけ0にしています。
+        //JumpPowerはゲージのMAX値が600、一秒間に60(10%)減って、クリックで30(5%)増えるように設定しています。
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(JumpPower <= 0)
+        {
+            JumpPower = 1;
+        }
+
         if (Input.GetKeyDown(clickKey))
         {
 
@@ -32,16 +38,19 @@ public class JumpPowerScript : MonoBehaviour
                 if(clickedGameObject.tag == "Player")
                 {
                     //クリックでクリック回数を増加
-                    JumpPower++;
-                    Debug.Log("Jumpower: " + JumpPower);
+                    JumpPower += 30;
                 }
             }
         }
 
+        JumpPower--;
+
+        Debug.Log("Jumpower: " + JumpPower);
+
         //if内の条件でシーン遷移(落ちるシーンに以降)
         if (JumpPower >= 10)
         {
-            SceneManager.LoadScene(fallSceneName);
+            //SceneManager.LoadScene(fallSceneName);
         }
     }
 }
