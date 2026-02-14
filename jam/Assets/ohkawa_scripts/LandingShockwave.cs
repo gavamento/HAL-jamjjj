@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// 着地したときに衝撃波オブジェクトを出す。
+/// 着地したときに衝撃波とWaveを出す。
 /// ジャンプするRigidbodyが付いている同じオブジェクトにアタッチする。
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
@@ -16,6 +16,13 @@ public class LandingShockwave : MonoBehaviour
 
     [Tooltip("衝撃波を出す高さオフセット（足元に出す場合は0かマイナス）")]
     public float shockwaveHeightOffset = 0f;
+
+    [Header("Wave生成")]
+    [Tooltip("着地時に生成するWaveのプレハブ（Wave_Moveが付いたオブジェクトを指定）")]
+    public GameObject wavePrefab;
+
+    [Tooltip("Waveを出す高さオフセット（地面の高さに合わせて調整）")]
+    public float waveHeightOffset = 0f;
 
     [Header("着地判定（任意）")]
     [Tooltip("指定すると、このレイヤーとの衝突時だけ衝撃波を出す。未指定なら全ての衝突で判定")]
@@ -40,6 +47,7 @@ public class LandingShockwave : MonoBehaviour
         if (_wasInAir)
         {
             SpawnShockwave(collision);
+            SpawnWave(collision);
         }
 
         _wasInAir = false;
@@ -82,5 +90,16 @@ public class LandingShockwave : MonoBehaviour
         {
             Instantiate(shockwavePrefab, pos, Quaternion.identity);
         }
+    }
+
+    void SpawnWave(Collision collision)
+    {
+        if (wavePrefab == null) return;
+
+        Vector3 pos = transform.position + Vector3.up * waveHeightOffset;
+        if (collision.contactCount > 0)
+            pos = collision.GetContact(0).point + Vector3.up * waveHeightOffset;
+
+        Instantiate(wavePrefab, pos, Quaternion.identity);
     }
 }

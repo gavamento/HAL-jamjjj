@@ -33,4 +33,16 @@ public class Map_Enemy_Create : MonoBehaviour
     {
         
     }
+    private void FixedUpdate()
+    {
+        if (EnemyNum < EnemyMax)
+        {
+            float ran = EnemyNum + Random.Range(3.0f, 7.0f);
+            Vector3 pos = transform.position + transform.forward * 1.5f;
+            pos.x = Wave_Move.Wave_X_Pos + ran;
+            pos.y += 1;
+            GameObject obj = Instantiate(enemy, pos, Quaternion.identity);
+            EnemyNum++;
+        }
+    }
 }

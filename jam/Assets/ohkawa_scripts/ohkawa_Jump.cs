@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class JumpPowerScript : MonoBehaviour
 {
-    public string fallSceneName = "SampleTitle";    //ジャンプのシーンが終わったらこの名前のシーンに遷移する
-    public KeyCode clickKey = KeyCode.Mouse0;       //ジャンプするためのキー
+    public string fallSceneName = "SampleTitle";    //???????????????????????????
+    public KeyCode clickKey = KeyCode.Mouse0;       //???????????
 
-    GameObject clickedGameObject;//クリックされたゲームオブジェクトを代入する変数
+    GameObject clickedGameObject;//???????????????????????
 
-    public static int JumpPower = 0;                //ジャンプするためのパワー(仮)
+    public static int JumpPower = 10;
+    /// <summary>??????????????????????????????????</summary>
+    public int GetCurrentPower() => JumpPower;
+    public Rigidbody jumpTarget;                    //??????????Rigidbody
+    public float jumpForce = 10f;                  //??????
 
     void Start()
     {
-        JumpPower = 0;      //初期化処理。一旦パワーだけ0にしています。
-        //JumpPowerはゲージのMAX値が600、一秒間に60(10%)減って、クリックで30(5%)増えるように設定しています。
+
     }
 
     void Update()
     {
-        if(JumpPower <= 0)
-        {
-            JumpPower = 1;
-        }
+        //if(JumpPower <= 0)
+        //{
+        //    JumpPower = 1;
+        //}
 
         if (Input.GetKeyDown(clickKey))
         {
@@ -30,30 +33,30 @@ public class JumpPowerScript : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 clickedGameObject = hit.collider.gameObject;
-                Debug.Log(clickedGameObject.name);//ゲームオブジェクトの名前を出力
+                Debug.Log(clickedGameObject.name);//???????????????
 
-                if(clickedGameObject.tag == "Player")
+                if (clickedGameObject.tag == "Player")
                 {
-                    //クリックでクリック回数を増加
-                    JumpPower += 100;
+                    //??????????????
+                    JumpPower += 10;
                 }
             }
         }
 
-        JumpPower--;
-
         Debug.Log("Jumpower: " + JumpPower);
 
-        //if内の条件でシーン遷移(落ちるシーンに以降)
+        // 100?????1???????????????????????????????????
         if (JumpPower >= 100)
         {
-            //SceneManager.LoadScene(fallSceneName);
+            DoJump();
+            JumpPower = 0;
         }
     }
 
     void DoJump()
     {
         if (jumpTarget == null) return;
+        jumpTarget.useGravity = true;  // ?????????????
         jumpTarget.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 }
