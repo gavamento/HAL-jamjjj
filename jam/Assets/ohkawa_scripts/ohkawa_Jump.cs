@@ -38,7 +38,7 @@ public class JumpPowerScript : MonoBehaviour
                 if(clickedGameObject.tag == "Player")
                 {
                     //クリックでクリック回数を増加
-                    JumpPower += 30;
+                    JumpPower += 100;
                 }
             }
         }

@@ -131,9 +131,10 @@ GameObject:
   - component: {fileID: 753328481}
   - component: {fileID: 753328480}
   - component: {fileID: 753328479}
+  - component: {fileID: 753328483}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,6 +232,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &753328483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753328478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d87d646fe8effe42a00a0e4863ab8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ohkawa_playerScript
+  AuraArray:
+  - {fileID: 4048505733534174696, guid: e34484b9510a29f40a6be7d9d33fad3d, type: 3}
+  - {fileID: 7716823700007201412, guid: ef995e8bdcd991944975c0e0187ffa0b, type: 3}
+  - {fileID: 4626519615455064513, guid: c2dfd7495262c0a45939ed16980d32bf, type: 3}
+  - {fileID: 2946704339171071150, guid: 2c7823b1cad37aa44a22b538e5a52ed0, type: 3}
+  - {fileID: 8074294021213548180, guid: 3bf3a7b08ca75d046bc66c8631a2e778, type: 3}
 --- !u!1 &977198416
 GameObject:
   m_ObjectHideFlags: 0
