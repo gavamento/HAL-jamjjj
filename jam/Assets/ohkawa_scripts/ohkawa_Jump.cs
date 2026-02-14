@@ -2,34 +2,52 @@ using UnityEngine;
 
 public class JumpPowerScript : MonoBehaviour
 {
-    public KeyCode clickKey = KeyCode.Mouse0;       // ??????????????
+    public string fallSceneName = "SampleTitle";    //ジャンプのシーンが終わったらこの名前のシーンに遷移する
+    public KeyCode clickKey = KeyCode.Mouse0;       //ジャンプするためのキー
 
-    public static int JumpPower = 0;                // ????????????(?)
+    GameObject clickedGameObject;//クリックされたゲームオブジェクトを代入する変数
 
-    [Header("???????100????????")]
-    [Tooltip("??????????Rigidbody?????????")]
-    public Rigidbody jumpTarget;
-    [Tooltip("????????????????????")]
-    public float jumpForce = 10f;
+    public static int JumpPower = 0;                //ジャンプするためのパワー(仮)
 
     void Start()
     {
-        JumpPower = 0;
+        JumpPower = 0;      //初期化処理。一旦パワーだけ0にしています。
+        //JumpPowerはゲージのMAX値が600、一秒間に60(10%)減って、クリックで30(5%)増えるように設定しています。
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(clickKey))
+        if(JumpPower <= 0)
         {
-            JumpPower++;
-            Debug.Log("Jumpower: " + JumpPower);
+            JumpPower = 1;
         }
 
-        // 100?????????
+        if (Input.GetKeyDown(clickKey))
+        {
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit = new RaycastHit();
+            if (Physics.Raycast(ray, out hit))
+            {
+                clickedGameObject = hit.collider.gameObject;
+                Debug.Log(clickedGameObject.name);//ゲームオブジェクトの名前を出力
+
+                if(clickedGameObject.tag == "Player")
+                {
+                    //クリックでクリック回数を増加
+                    JumpPower += 100;
+                }
+            }
+        }
+
+        JumpPower--;
+
+        Debug.Log("Jumpower: " + JumpPower);
+
+        //if内の条件でシーン遷移(落ちるシーンに以降)
         if (JumpPower >= 100)
         {
-            DoJump();
-            JumpPower = 0;
+            //SceneManager.LoadScene(fallSceneName);
         }
     }
 
