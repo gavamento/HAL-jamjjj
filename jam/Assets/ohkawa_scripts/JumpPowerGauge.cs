@@ -13,7 +13,7 @@ public class JumpPowerGauge : MonoBehaviour
 
     [Header("設定")]
     [Tooltip("ゲージが満タンになるJumpPowerの値（JumpPowerScript側の閾値と合わせる）")]
-    public int maxPower = 10;
+    public int maxPower = 100;
 
     [Tooltip("ゲージの変化を滑らかにする（0で即反映）")]
     public float smoothSpeed = 8f;

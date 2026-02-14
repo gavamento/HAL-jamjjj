@@ -1,33 +1,41 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class JumpPowerScript : MonoBehaviour
 {
-    public string fallSceneName = "SampleTitle";    //ジャンプのシーンが終わったらこの名前のシーンに遷移する
-    public KeyCode clickKey = KeyCode.Mouse0;       //ジャンプするためのキー
+    public KeyCode clickKey = KeyCode.Mouse0;       // ??????????????
 
-    public static int JumpPower = 30;                //ジャンプするためのパワー(仮)
+    public static int JumpPower = 0;                // ????????????(?)
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("???????100????????")]
+    [Tooltip("??????????Rigidbody?????????")]
+    public Rigidbody jumpTarget;
+    [Tooltip("????????????????????")]
+    public float jumpForce = 10f;
+
     void Start()
     {
-        JumpPower = 0;      //初期化処理。一旦パワーだけ0にしています。
+        JumpPower = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(clickKey))
         {
-            //クリックでクリック回数を増加
             JumpPower++;
             Debug.Log("Jumpower: " + JumpPower);
         }
 
-        //if内の条件でシーン遷移(落ちるシーンに以降)
+        // 100?????????
         if (JumpPower >= 100)
         {
-            SceneManager.LoadScene(fallSceneName);
+            DoJump();
+            JumpPower = 0;
         }
+    }
+
+    void DoJump()
+    {
+        if (jumpTarget == null) return;
+        jumpTarget.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 }
